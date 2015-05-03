@@ -1,0 +1,24 @@
+html, body {
+	height: 100%; padding: 0; margin: 0; 
+}
+
+div { 
+	width: 50%; height: 50%; float: left; 
+}
+
+#div1a { background: #DDD; }
+#div1b { background: #AAA; }
+#div1c { background: #777; }
+#div1d { background: #444; }
+#div2a { background: #DDD; }
+#div2b { background: #AAA; }
+#div2c { background: #777; }
+#div2d { background: #444; }
+#div3a { background: #DDD; }
+#div3b { background: #AAA; }
+#div3c { background: #777; }
+#div3d { background: #444; }
+#div4a { background: #DDD; }
+#div4b { background: #AAA; }
+#div4c { background: #777; }
+#div4d { background: #444; }
