@@ -50,10 +50,15 @@ $(document).ready(function(){
                 }
             },
             series: [{
-                name: 'Hoy',
-                color: '#b30000',
+                name: 'Inversor Hoy',
                 data: [20, 20, 20, 30, 40, 50, 40, 40, 50, 60, 55, 65, 70, 85, 80, 80, 85, 90, 70, 50, 40, 20, 20, 20],
                 pointInterval: 3600 * 1000 // one day]
+            },
+            {
+                name: 'Energía Hoy',
+                data: [40, 30, 10, 20, 30, 40, 50, 60, 70, 60, 50, 40, 30, 40, 50, 60, 50, 40, 30, 20, 10, 00, 10, 20],
+                pointInterval: 3600 * 1000, // one day]
+                type: 'column'
             }]
         });
     });
@@ -81,5 +86,29 @@ $(document).ready(function(){
 
     });
 
-});
 
+    $('#example2').datepicker({
+        format: "dd/mm/yyyy",
+        keyboardNavigation: true
+    }).on('changeDate', function(ev){
+
+        var arr = [];
+        while(arr.length < 24){
+            var randomnumber=Math.ceil(Math.random()*100)
+            var found=false;
+            for(var i=0;i<arr.length;i++){
+                if(arr[i]==randomnumber){found=true;break}
+            }
+            if(!found)arr[arr.length]=randomnumber;
+        }
+
+        $('#area1').highcharts().addSeries({
+            name: (ev.date.getDate() + '/' + (ev.date.getMonth() + 1)  + '/' +  ev.date.getFullYear()),
+            data: arr,//[10, 10, 50, 70, 30, 20, 10, 70, 90, 60, 35, 65, 70, 85, 80, 80, 85, 90, 70, 50, 40, 20, 20, 20],
+            pointInterval: 3600 * 1000, // one day]
+            type: "column"
+        });
+
+    });
+
+});
