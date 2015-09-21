@@ -64,8 +64,8 @@
     .sider-slider-left a{
       float: left;
       height: 140%;
-      width: 2%;
-      background-color: grey;
+      width: 5%;
+      background-color: #5cb85c;
       display: inline-block;
       position: absolute;
       margin-top: -10%;
@@ -79,8 +79,8 @@
     .sider-slider-right a{
       float: right;
       height: 140%;
-      width: 2%;
-      background-color: grey;
+      width: 5%;
+      background-color: #5cb85c;
       display: inline-block;
       position: absolute;
       margin-top: -10%;
