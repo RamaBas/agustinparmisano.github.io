@@ -61,7 +61,7 @@ $(function () {
             min: 0,
             max: 200,
             title: {
-                text: 'Speed'
+                text: 'Temperatura'
             }
         },
 
@@ -70,12 +70,12 @@ $(function () {
         },
 
         series: [{
-            name: 'Speed',
+            name: 'Temperatura',
             data: [80],
             dataLabels: {
                 format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                     ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
-                       '<span style="font-size:12px;color:silver">km/h</span></div>'
+                       '<span style="font-size:12px;color:silver">°C</span></div>'
             },
             tooltip: {
                 valueSuffix: ' km/h'
@@ -90,17 +90,20 @@ $(function () {
             min: 0,
             max: 5,
             title: {
-                text: 'RPM'
+                text: 'Humedad'
             }
+        },
+        credits: {
+            enabled: false
         },
 
         series: [{
-            name: 'RPM',
+            name: 'Humedad',
             data: [1],
             dataLabels: {
                 format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                     ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}</span><br/>' +
-                       '<span style="font-size:12px;color:silver">* 1000 / min</span></div>'
+                       '<span style="font-size:12px;color:silver"> %</span></div>'
             },
             tooltip: {
                 valueSuffix: ' revolutions/min'

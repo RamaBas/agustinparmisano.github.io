@@ -25,6 +25,7 @@
 
         <!-- FreeDom Charts JS-->
         <script src="js/charts/temphume.js"></script>
+        <script src="js/charts/electricharts.js"></script>
     </head>
     <body>
             <!-- navbar -->
@@ -34,14 +35,14 @@
                 </div>
                 <div class="navbar-collapse collapse navbar-warning-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="javascript:void(0)">Active</a></li>
-                        <li><a href="javascript:void(0)">Link</a></li>
+                        <li class="active"><a href="javascript:void(0)">Panel de Control</a></li>
+                        <li><a href="javascript:void(0)"><i class="mdi-social-poll">Estadísticas</i></a></li>
                     </ul>
                       <form class="navbar-form navbar-left">
-                        <input class="form-control col-lg-8" placeholder="Search" type="text">
+                        <input class="form-control col-lg-8" placeholder="Buscar" type="text">
                         </form>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="javascript:void(0)">Link</a></li>
+                        <li><a href="javascript:void(0)">Ayuda/Acerca De</a></li>
                     </ul>
                 </div>
             </div>
@@ -50,30 +51,9 @@
         <div class="container-fluid">
             <!-- Panels -->
             <div class="row">
-                <!-- Panel 1 -->
-                <div class="col-md-8">
-                    <div class="panel panel-material-indigo-500">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Panel warning</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <!-- Charts 1 Solid Temphume -->
-                                    <div style="width: 600px; height: 400px; margin: 0 auto">
-                                        <div id="container-speed" style="width: 300px; height: 200px; float: left"></div>
-                                        <div id="container-rpm" style="width: 300px; height: 200px; float: left"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Panel 1 End-->
 
-                <!-- Panel 2 -->
-                <div class="col-md-2">
+                <!-- Panel 1 -->
+                <div class="col-md-4">
                     <div class="panel panel-material-amber-700">
                         <div class="panel-heading">
                             <h3 class="panel-title">Luces</h3>
@@ -104,9 +84,9 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Panel 2 End -->
+                    <!-- Panel 1 End -->
 
-                    <!-- Panel 3 -->
+                    <!-- Panel 2 -->
                     <div class="panel panel-material-deep-orange-500">
                         <div class="panel-heading">
                             <h3 class="panel-title">Acciones</h3>
@@ -132,7 +112,45 @@
                         </div>                       
                     </div>
                 </div>
-                <!-- Panel 3 End -->
+                <!-- Panel 2 End -->
+
+                <!-- Panel 3 -->
+                <div class="col-lg-8">
+                    <div class="panel panel-material-indigo-500">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Temperatura y Humedad</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <!-- Charts 1 Solid Temphume -->
+                                    <div style="width: 400px; height: 200px; margin: 0 ">
+                                        <div id="container-speed" style="width: 300px; height: 200px; float: left"></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div style="width: 400px; height: 200px; margin: 0 ">
+                                        <div id="container-rpm" style="width: 300px; height: 200px; float: left"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-material-green-500">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Consumo Eléctrico</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Panel 3 End-->
+
             </div>
             <!-- Panels End -->
         </div>
