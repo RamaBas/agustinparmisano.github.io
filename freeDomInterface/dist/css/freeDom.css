@@ -1,0 +1,29 @@
+body {
+	overflow-x: hidden;
+}
+
+#show-emp, #show-hume {
+	display: none;
+}
+
+@media(max-width: 320px) {
+	#container-speed, #container-rpm  {
+		display: none;
+	}
+
+	#show-emp, #show-hume {
+		display: block;
+	}
+
+}
+
+@media(max-width: 320px) {
+	#container-speed, #container-rpm  {
+		padding-right: 10%;
+	}
+
+}
+
+@media(min-width: 1200px) {
+
+}
