@@ -55,6 +55,9 @@
   display: none;
 }
 
+.panel {
+  margin-bottom: 7px;
+}
 
 @media screen and (max-width: 800px) {
     body {
