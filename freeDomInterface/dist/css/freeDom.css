@@ -1,4 +1,4 @@
-body, html {
+body {
 	overflow-x: hidden;
 }
 
@@ -38,6 +38,15 @@ body, html {
 }
 
 @media(min-width: 1200px) {
+	#container-speed {
+		margin-left: 15%;
+	}
+
+	#container-rpm  {
+		margin-left: 35%;
+	}
+
+
 	#centro {
 		display: none;
 	}
@@ -52,6 +61,18 @@ body, html {
 }
 
 @media(min-width: 1000px) and (max-width: 1200px){
+	#panel-sensores {
+		margin-left: 10%;
+	}
+
+	#togles-naranja-md{
+		margin-top: 8%;
+	}
+
+	#panel-naranja-md{
+		height: 197px;
+	}
+
 	#centro {
 		display: block;
 	}
@@ -67,6 +88,19 @@ body, html {
 
 
 @media(max-width: 1000px){
+	#container-speed, #container-rpm  {
+		margin-left: 50%;
+	}
+
+	#togles-naranja-xs{
+		margin-top: 8%;
+	}
+
+	#panel-naranja-xs{
+		height: 197px;
+	}
+
+
 	#centro {
 		display: none;
 	}
@@ -80,5 +114,10 @@ body, html {
 	}
 }
 
+@media(max-width: 700px){
+	#container-speed, #container-rpm  {
+		margin-left: 25%;
+	}
+}
 
 
