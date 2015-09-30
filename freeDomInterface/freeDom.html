@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Twitter Bootstrap -->
-        <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Material Design for Bootstrap -->
         <link href="dist/css/roboto.min.css" rel="stylesheet">
@@ -38,7 +38,7 @@
                 <div class="navbar-collapse collapse navbar-warning-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="javascript:void(0)">Panel de Control</a></li>
-                        <li><a href="javascript:void(0)"><i class="mdi-social-poll">Estadísticas</i></a></li>
+                        <li><a href="javascript:void(0)"><i class="icon mdi-social-poll">Estadísticas</i></a></li>
                     </ul>
                       <form class="navbar-form navbar-left">
                         <input class="form-control col-lg-8" placeholder="Buscar" type="text">
@@ -53,9 +53,8 @@
         <div class="container-fluid">
             <!-- Panels -->
             <div class="row">
-
+                <div class="col-lg-12" id="centro">
                 <!-- Panel 1 -->
-                <div class="col-md-4">
                     <div class="panel panel-material-amber-700">
                         <div class="panel-heading">
                             <h3 class="panel-title">Luces</h3>
@@ -66,19 +65,19 @@
                                     <div class="form-group">
                                         <div class="togglebutton togglebutton-material-yellow-700">
                                             <label>
-                                                <input type="checkbox" checked=""><span class="toggle"></span> Luz Cocina
+                                                <input type="checkbox" ><span class="toggle"></span> Luz Cocina
                                             </label>
                                         </div>
                                         <br>
                                         <div class="togglebutton togglebutton-material-yellow-700">
                                             <label>
-                                                <input type="checkbox" checked=""><span class="toggle"></span> Luz Comedor
+                                                <input type="checkbox" ><span class="toggle"></span> Luz Comedor
                                             </label>
                                         </div>
                                         <br>
                                         <div class="togglebutton togglebutton-material-yellow-700">
                                             <label>
-                                                <input type="checkbox" checked=""><span class="toggle"></span> Luz Baño
+                                                <input type="checkbox" ><span class="toggle"></span> Luz Baño
                                             </label>
                                         </div>                          
                                     </div>
@@ -99,13 +98,79 @@
                                     <div class="form-group">
                                         <div class="togglebutton togglebutton-material-deep-orange-900">
                                             <label>
-                                                <input type="checkbox" checked=""><span class="toggle"></span> Alarma
+                                                <input type="checkbox" ><span class="toggle"></span> Alarma
                                             </label>
                                         </div>
                                         <br>
                                         <div class="togglebutton togglebutton-material-deep-orange-900">
                                             <label>
-                                                <input type="checkbox" checked=""><span class="toggle"></span> Láser
+                                                <input type="checkbox" ><span class="toggle"></span> Láser
+                                            </label>
+                                        </div>                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                       
+                    </div>
+                </div>
+                <!-- Panel 2 End -->                    
+                </div>
+            </div>
+
+            <div class="row">
+
+                <!-- Panel 1 -->
+                <div class="col-md-4" id="izquierda">
+                    <div class="panel panel-material-amber-700">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Luces</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <div class="togglebutton togglebutton-material-yellow-700">
+                                            <label>
+                                                <input type="checkbox" ><span class="toggle"></span> Luz Cocina
+                                            </label>
+                                        </div>
+                                        <br>
+                                        <div class="togglebutton togglebutton-material-yellow-700">
+                                            <label>
+                                                <input type="checkbox" ><span class="toggle"></span> Luz Comedor
+                                            </label>
+                                        </div>
+                                        <br>
+                                        <div class="togglebutton togglebutton-material-yellow-700">
+                                            <label>
+                                                <input type="checkbox" ><span class="toggle"></span> Luz Baño
+                                            </label>
+                                        </div>                          
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Panel 1 End -->
+
+                    <!-- Panel 2 -->
+                    <div class="panel panel-material-deep-orange-500">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Acciones</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <div class="togglebutton togglebutton-material-deep-orange-900">
+                                            <label>
+                                                <input type="checkbox" ><span class="toggle"></span> Alarma
+                                            </label>
+                                        </div>
+                                        <br>
+                                        <div class="togglebutton togglebutton-material-deep-orange-900">
+                                            <label>
+                                                <input type="checkbox" ><span class="toggle"></span> Láser
                                             </label>
                                         </div>                        
                                     </div>
@@ -152,6 +217,70 @@
                     </div>
                 </div>
                 <!-- Panel 3 End-->
+
+
+                <!-- Panel 1 Responsive a la Derecha -->
+                <div class="col-md-4" id="responsive-derecha">
+                    <div class="panel panel-material-amber-700">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Luces</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <div class="togglebutton togglebutton-material-yellow-700">
+                                            <label>
+                                                <input type="checkbox" ><span class="toggle"></span> Luz Cocina
+                                            </label>
+                                        </div>
+                                        <br>
+                                        <div class="togglebutton togglebutton-material-yellow-700">
+                                            <label>
+                                                <input type="checkbox" ><span class="toggle"></span> Luz Comedor
+                                            </label>
+                                        </div>
+                                        <br>
+                                        <div class="togglebutton togglebutton-material-yellow-700">
+                                            <label>
+                                                <input type="checkbox" ><span class="toggle"></span> Luz Baño
+                                            </label>
+                                        </div>                          
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Panel 1 Responsive a la Derecha End-->
+                
+                    <!-- Panel 2 Responsive a la Derecha -->
+                    <div class="panel panel-material-deep-orange-500">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Acciones</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <div class="togglebutton togglebutton-material-deep-orange-900">
+                                            <label>
+                                                <input type="checkbox" ><span class="toggle"></span> Alarma
+                                            </label>
+                                        </div>
+                                        <br>
+                                        <div class="togglebutton togglebutton-material-deep-orange-900">
+                                            <label>
+                                                <input type="checkbox" ><span class="toggle"></span> Láser
+                                            </label>
+                                        </div>                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                       
+                    </div>
+                </div>
+                <!-- Panel 2 Responsive a la Derecha End-->
+
 
             </div>
             <!-- Panels End -->
