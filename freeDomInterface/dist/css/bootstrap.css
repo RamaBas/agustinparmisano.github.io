@@ -4218,9 +4218,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-toggle .icon-bar + .icon-bar {
   margin-top: 4px;
 }
-@media (min-width: 768px) {
+@media (min-width: 300px) {
   .navbar-toggle {
-    display: none;
+    display: block;
   }
 }
 .navbar-nav {
