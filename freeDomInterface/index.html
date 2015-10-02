@@ -359,63 +359,98 @@
 
             <div class="row">
 
-                <!-- Panel Grafico  -->
-                <div class="col-lg-8" >
-                    <div class="panel panel-material-purple-500">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Estadísticas Temperatura y Humedad</h3>
+                <div class="swiper-container-vertical">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <!-- Panel Grafico  -->
+                            <div class="col-lg-8" >
+                                <div class="panel panel-material-red-500">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Temperatura</h3>
+                                    </div>
+                                    <div class="panel-body" id="panel-sensores">
+                                        <div id="temp-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- Panel Grafico End-->
+                           <!-- Panel Calendar Temperatura -->
+                            <div class="col-md-4">
+                                <div class="panel panel-material-red-700">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Según el día</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="input-append date" id="datepicker" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                                            <input  type="text" placeholder="click to show datepicker"  id="example1">
+                                        </div>                
+                                    </div>
+                                </div>  
+                            </div>
+                            <!-- Panel Calendar Temperatura  End-->
                         </div>
-                        <div class="panel-body" id="panel-sensores">
-                            <div id="stats-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        <div class="swiper-slide">
+                        <!-- Panel Grafico  -->
+                        <div class="col-lg-8" >
+                            <div class="panel panel-material-blue-500">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Humedad</h3>
+                                </div>
+                                <div class="panel-body" id="panel-sensores">
+                                    <div id="hume-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- Panel Grafico End-->
+                        <!-- Panel Calendar Humedad -->
+                        <div class="col-md-4">
+                            <div class="panel panel-material-blue-700">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Según el día</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="input-append date" id="datepicker" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                                        <input  type="text" placeholder="click to show datepicker"  id="example2">
+                                    </div>                       
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Panel Calendar Humedad End-->
+                        </div>
+                        <div class="swiper-slide">
+                            <!-- Panel Grafico  -->
+                            <div class="col-lg-8" >
+                                <div class="panel panel-material-green-500">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Consumo Eléctrico</h3>
+                                    </div>
+                                    <div class="panel-body" id="panel-sensores">
+                                        <div id="electric-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- Panel Grafico End-->
+                            <!-- Panel Calendar Electrico -->
+                            <div class="col-md-4">
+                                <div class="panel panel-material-green-700">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Según el día</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="input-append date" id="datepicker" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                                            <input  type="text" placeholder="click to show datepicker"  id="example3">
+                                        </div>                       
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- Panel Calendar Electrico End-->
                         </div>
                     </div>
-
                 </div>
-                <!-- Panel Grafico End-->
-
-
-                <!-- Panel Calendar Temperatura -->
-                <div class="col-md-4">
-                    <div class="panel panel-material-red-700">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Temperatura</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="input-append date" id="datepicker" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                                <input  type="text" placeholder="click to show datepicker"  id="example1">
-                            </div>                
-                        </div>
-                    </div>  
-                    <!-- Panel Calendar Temperatura  End-->
-                
-                    <!-- Panel Calendar Humedad -->
-                    <div class="panel panel-material-blue-700">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Humedad</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="input-append date" id="datepicker" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                                <input  type="text" placeholder="click to show datepicker"  id="example2">
-                            </div>                       
-                        </div>
-                    </div>
-                    <!-- Panel Calendar Humedad End-->
-                    
-                    <!-- Panel Calendar Electrico -->
-                    <div class="panel panel-material-green-700">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Consumo Eléctrico</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="input-append date" id="datepicker" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                                <input  type="text" placeholder="click to show datepicker"  id="example3">
-                            </div>                       
-                        </div>
-                    </div>
-                <!-- Panel Calendar Electrico End-->
-
-            </div>
-            <!-- Panels End -->               
+                <!-- Panels End -->               
             </div>
         </div>
     </div>
@@ -434,6 +469,11 @@
             shadowOffset: 20,
             shadowScale: 0.94
         }
+    });
+    var swiperVertical = new Swiper('.swiper-container-vertical', {
+        direction: 'vertical',
+        grabCursor: true,
+
     });
     </script>
 </body>
