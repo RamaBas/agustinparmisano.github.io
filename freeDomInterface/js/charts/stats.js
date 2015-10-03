@@ -1,5 +1,31 @@
 $(document).ready(function(){
 
+    function jsonConverter(day, month, year) {
+        var pickedDate = day + "-" + month + "-" + year;
+        var xmlhttp;
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else { // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var meteo = JSON.parse(xmlhttp.responseText);
+                alert(meteo);
+            }
+        }
+        xmlhttp.open("GET", "http://clima.info.unlp.edu.ar/last?lang=es", true);
+        xmlhttp.send();
+
+        alert("PickedDate" + pickedDate);        
+
+
+        //while (.localeCompare(pickedDate)) {
+
+        
+    }; 
+
     $(function () {
         $('#temp-container').highcharts({
             chart: {
@@ -217,7 +243,6 @@ $(document).ready(function(){
 
     window.onload = function(){
         
-        
         g_globalObjectTemp = new JsDatePick({
             useMode:1,
             isStripped:true,
@@ -236,6 +261,7 @@ $(document).ready(function(){
         });     
         
         g_globalObjectTemp.setOnSelectedDelegate(function(){
+
             var arr = [];
             while(arr.length < 24){
                 var randomnumber=Math.ceil(Math.random()*100)
@@ -245,7 +271,11 @@ $(document).ready(function(){
                 }
                 if(!found)arr[arr.length]=randomnumber;
             }
+
             var objTemp = g_globalObjectTemp.getSelectedDay();
+
+            jsonConverter(objTemp.day, objTemp.month, objTemp.year);
+
             $('#temp-container').highcharts().addSeries({
                 name: "Temperatura en " + (objTemp.day + '/' + objTemp.month  + '/' +  objTemp.year),
                 data: arr,//[10, 10, 50, 70, 30, 20, 10, 70, 90, 60, 35, 65, 70, 85, 80, 80, 85, 90, 70, 50, 40, 20, 20, 20],
@@ -311,6 +341,9 @@ $(document).ready(function(){
         
         g_globalObjectElect.setOnSelectedDelegate(function(){
             var objElect = g_globalObjectElect.getSelectedDay();
+
+
+
             var arr = [];
             while(arr.length < 24){
                 var randomnumber=Math.ceil(Math.random()*100)
@@ -329,5 +362,4 @@ $(document).ready(function(){
             });            
         });
     };
-});
-
+}); 
