@@ -1,29 +1,94 @@
 $(document).ready(function(){
 
     function jsonConverter(day, month, year) {
-        var pickedDate = day + "-" + month + "-" + year;
-        var xmlhttp;
-        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
+
+        var jsonDeUnDia = [ 
+                    {
+                        
+                        "name":"temperatura",
+
+                        "values":[
+                                {
+                                    "created_hour":"17:35:45.201",
+                                    "value":"19"
+                                },
+                                {   
+                                    "created_hour":"17:35:55.862",
+                                    "value":"19"
+                                },
+                                {   
+                                    "created_hour":"17:36:06.445",
+                                    "value":"19"
+                                },
+                                {   
+                                    "created_hour":"17:36:16.928",
+                                    "value":"19"
+                                },
+                                {   
+                                    "created_hour":"17:36:27.391",
+                                    "value":"19"
+                                },
+                                {   
+                                    "created_hour":"17:36:37.845",
+                                    "value":"19"
+                                },
+                                {   
+                                    "created_hour":"17:36:48.340",  
+                                    "value":"19"
+                                },
+                                {
+                                    "created_hour":"17:36:58.898",
+                                    "value":"19"
+                                },
+                                {
+                                    "created_hour":"17:37:09.602",
+                                    "value":"19"
+                                },
+                                {   
+                                    "created_hour":"17:37:20.162",
+                                    "value":"19"
+                                },
+                                {
+                                    "created_hour":"17:37:30.987",
+                                    "value":"19"
+                                },
+                                {
+                                    "created_hour":"17:37:41.465",
+                                    "value":"19"
+                                },
+                                {
+                                    "created_hour":"17:37:52.022",
+                                    "value":"19"
+                                },
+                                {
+                                    "created_hour":"17:38:02.567",
+                                    "value":"19"
+                                },
+                                {
+                                    "created_hour":"17:38:13.142",
+                                    "value":"19"
+                                },
+                                {
+                                    "created_hour":"17:38:23.670",
+                                    "value":"19"
+                                }
+                        ]
+                    
+                        
+                        }
+                ];
+        var diaValorJSON = jsonDeUnDia;
+        var tiempos = [];
+        var valores = [];
+
+        for(t=0; t<diaValorJSON[0].values.length; t++){
+            tiempos.push(diaValorJSON[0].values[t].created_hour);
+            valores.push(parseInt(diaValorJSON[0].values[t].value));
         }
-        else { // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var meteo = JSON.parse(xmlhttp.responseText);
-                alert(meteo);
-            }
-        }
-        xmlhttp.open("GET", "http://clima.info.unlp.edu.ar/last?lang=es", true);
-        xmlhttp.send();
 
-        alert("PickedDate" + pickedDate);        
+        var diaValores = [ tiempos, valores ];
 
-
-        //while (.localeCompare(pickedDate)) {
-
-        
+        return diaValores;
     }; 
 
     $(function () {
@@ -41,16 +106,7 @@ $(document).ready(function(){
                 title: {
                     text: 'Hora del Día'
                 },
-                type: 'datetime',
-                tickInterval: 3600 * 1000,
-            labels: {
-                    formatter: function() {
-                        var d = new Date(this.value);
-                        d.setHours(d.getHours()-21);
-                        var hora = Highcharts.dateFormat('%H:%M',d);
-                        return hora;
-                     }
-            },
+            categories: ['11:00', '11:05', '11:10','11:15','11:20','11:25','11:30','11:35','11:40','11:45',]
 
             },
 
@@ -58,9 +114,11 @@ $(document).ready(function(){
                 title: {
                     text: 'Temperatura'
                 },
+                min: 0,
+                max: 50,
                 labels: {
                     formatter: function () {
-                        return this.value / 5 + 'C°';
+                        return this.value  + 'C°';
                     }
                 }
             },
@@ -68,7 +126,9 @@ $(document).ready(function(){
                 enabled: false
             },
             tooltip: {
-                pointFormat: '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
+                formatter:function(){
+                    return 'Temperatura ' + this.y + 'C° a las ' + this.key;
+                }
             },
             plotOptions: {
                 area: {
@@ -87,8 +147,7 @@ $(document).ready(function(){
             },
             series: [{
                 name: 'Temperatura Hoy',
-                data: [20, 20, 20, 30, 40, 50, 40, 40, 50, 60, 55, 65, 70, 85, 80, 80, 85, 90, 70, 50, 40, 20, 20, 20],
-                pointInterval: 3600 * 1000, // one day]
+                data: [12,13,13,14,16,17,18,15,13,13],
                 color: "#d32f2f",
                 type: 'line',
             }           
@@ -100,7 +159,7 @@ $(document).ready(function(){
     $(function () {
         $('#hume-container').highcharts({
             chart: {
-                type: 'spline'
+                type: 'column'
             },
             title: {
                 text: ''
@@ -111,17 +170,8 @@ $(document).ready(function(){
             xAxis: {
                 title: {
                     text: 'Hora del Día'
-                },
-                type: 'datetime',
-                tickInterval: 3600 * 1000,
-            labels: {
-                    formatter: function() {
-                        var d = new Date(this.value);
-                        d.setHours(d.getHours()-21);
-                        var hora = Highcharts.dateFormat('%H:%M',d);
-                        return hora;
-                     }
-            },
+                 },
+            categories: ['11:00', '11:05', '11:10','11:15','11:20','11:25','11:30','11:35','11:40','11:45',]
 
             },
 
@@ -129,9 +179,11 @@ $(document).ready(function(){
                 title: {
                     text: 'Humedad'
                 },
+                min: 0,
+                max: 100,
                 labels: {
                     formatter: function () {
-                        return this.value / 2 + '%';
+                        return this.value + '%';
                     }
                 }
             },
@@ -139,7 +191,9 @@ $(document).ready(function(){
                 enabled: false
             },
             tooltip: {
-                pointFormat: '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
+                formatter:function(){
+                    return 'Humedad ' + this.y + '% a las ' + this.key;
+                }
             },
             plotOptions: {
                 area: {
@@ -159,9 +213,8 @@ $(document).ready(function(){
             series: [
             {
                 name: 'Humedad Hoy',
-                data: [40, 30, 10, 20, 30, 40, 50, 60, 70, 60, 50, 40, 30, 40, 50, 60, 50, 40, 30, 20, 10, 00, 10, 20],
-                pointInterval: 3600 * 1000, // one day]
-                type: 'line',
+                data: [40,30,10,20,30,40,50,60,70,60,50,40,30,40,50,70,50,40,30,20,10,70,50,20],
+                type: 'column',
                 color: "#1976d2"
             }            
             ]
@@ -173,7 +226,7 @@ $(document).ready(function(){
     $(function () {
         $('#electric-container').highcharts({
             chart: {
-                type: 'spline'
+                type: 'area'
             },
             title: {
                 text: ''
@@ -185,26 +238,18 @@ $(document).ready(function(){
                 title: {
                     text: 'Hora del Día'
                 },
-                type: 'datetime',
-                tickInterval: 3600 * 1000,
-            labels: {
-                    formatter: function() {
-                        var d = new Date(this.value);
-                        d.setHours(d.getHours()-21);
-                        var hora = Highcharts.dateFormat('%H:%M',d);
-                        return hora;
-                     }
+            categories: ['11:00', '11:05', '11:10','11:15','11:20','11:25','11:30','11:35','11:40','11:45',]
             },
-
-            },
-
+        
             yAxis: {
                 title: {
                     text: 'Valtio Hora'
                 },
+                min: 0,
+                max: 1200,
                 labels: {
                     formatter: function () {
-                        return this.value * 10 + 'Wh';
+                        return this.value + 'Wh';
                     }
                 }
             },
@@ -212,7 +257,9 @@ $(document).ready(function(){
                 enabled: false
             },
             tooltip: {
-                pointFormat: '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
+                 formatter:function(){
+                    return 'Consumo Eléctrico ' + this.y + 'Wh a las ' + this.key;
+                }
             },
             plotOptions: {
                 area: {
@@ -233,8 +280,8 @@ $(document).ready(function(){
             {
                 name: 'Electricidad Consumida Hoy',
                 data: [40, 30, 10, 20, 30, 40, 50, 60, 70, 60, 50, 40, 30, 40, 50, 60, 50, 40, 30, 20, 10, 00, 10, 20],
-                pointInterval: 3600 * 1000, // one day]
                 color: "#388e3c",
+                type: "area"
             }            
             ]
         });
@@ -247,21 +294,11 @@ $(document).ready(function(){
             useMode:1,
             isStripped:true,
             target:"temp"
-            /*selectedDate:{                This is an example of what the full configuration offers.
-                day:5,                      For full documentation about these settings please see the full version of the code.
-                month:9,
-                year:2006
-            },
-            yearsRange:[1978,2020],
-            limitToToday:false,
-            cellColorScheme:"beige",
-            dateFormat:"%m-%d-%Y",
-            imgPath:"img/",
-            weekStartDay:1*/
         });     
         
         g_globalObjectTemp.setOnSelectedDelegate(function(){
 
+            /*HARDCODEANDO VALORES RANDOM
             var arr = [];
             while(arr.length < 24){
                 var randomnumber=Math.ceil(Math.random()*100)
@@ -270,16 +307,18 @@ $(document).ready(function(){
                     if(arr[i]==randomnumber){found=true;break}
                 }
                 if(!found)arr[arr.length]=randomnumber;
-            }
+            }*/
 
             var objTemp = g_globalObjectTemp.getSelectedDay();
-
-            jsonConverter(objTemp.day, objTemp.month, objTemp.year);
-
-            $('#temp-container').highcharts().addSeries({
+            var diaTempHora = jsonConverter(1,2,3);
+            var tempChart = $('#temp-container').highcharts();
+            var tempValues =  diaTempHora[1];
+            
+            tempChart.xAxis[0].setCategories(diaTempHora[0]);
+            
+            tempChart.addSeries({
                 name: "Temperatura en " + (objTemp.day + '/' + objTemp.month  + '/' +  objTemp.year),
-                data: arr,//[10, 10, 50, 70, 30, 20, 10, 70, 90, 60, 35, 65, 70, 85, 80, 80, 85, 90, 70, 50, 40, 20, 20, 20],
-                pointInterval: 3600 * 1000, // one day]
+                data: tempValues,
                 color: "#d32f2f"
             });
 
@@ -289,21 +328,12 @@ $(document).ready(function(){
             useMode:1,
             isStripped:true,
             target:"hume"
-            /*selectedDate:{                This is an example of what the full configuration offers.
-                day:5,                      For full documentation about these settings please see the full version of the code.
-                month:9,
-                year:2006
-            },
-            yearsRange:[1978,2020],
-            limitToToday:false,
-            cellColorScheme:"beige",
-            dateFormat:"%m-%d-%Y",
-            imgPath:"img/",
-            weekStartDay:1*/
         });     
         
         g_globalObjectHume.setOnSelectedDelegate(function(){
             var objHume = g_globalObjectHume.getSelectedDay();
+            
+            /*HARDCODEANDO VALORES RANDOM
             var arr = [];
             while(arr.length < 24){
                 var randomnumber=Math.ceil(Math.random()*100)
@@ -312,38 +342,34 @@ $(document).ready(function(){
                     if(arr[i]==randomnumber){found=true;break}
                 }
                 if(!found)arr[arr.length]=randomnumber;
-            }
+            }*/
 
-            $('#hume-container').highcharts().addSeries({
+            var objHume = g_globalObjectHume.getSelectedDay();
+            var diaHumeHora = jsonConverter(1,2,3);
+            var humeChart = $('#hume-container').highcharts();
+            var humeValues =  diaHumeHora[1];
+
+            humeChart.xAxis[0].setCategories(diaHumeHora[0]);
+            
+            humeChart.addSeries({
                 name: "Humedad en " + (objHume.day + '/' + objHume.month  + '/' +  objHume.year),
-                data: arr,//[10, 10, 50, 70, 30, 20, 10, 70, 90, 60, 35, 65, 70, 85, 80, 80, 85, 90, 70, 50, 40, 20, 20, 20],
-                pointInterval: 3600 * 1000, // one day]
-                color: "#1976d2"
+                data: humeValues,
+                color: "#1976d2",
             });
+
         });
 
         g_globalObjectElect = new JsDatePick({
             useMode:1,
             isStripped:true,
             target:"elect"
-            /*selectedDate:{                This is an example of what the full configuration offers.
-                day:5,                      For full documentation about these settings please see the full version of the code.
-                month:9,
-                year:2006
-            },
-            yearsRange:[1978,2020],
-            limitToToday:false,
-            cellColorScheme:"beige",
-            dateFormat:"%m-%d-%Y",
-            imgPath:"img/",
-            weekStartDay:1*/
         });     
         
         g_globalObjectElect.setOnSelectedDelegate(function(){
             var objElect = g_globalObjectElect.getSelectedDay();
 
 
-
+            /*HARDCODEANDO VALORES RANDOM
             var arr = [];
             while(arr.length < 24){
                 var randomnumber=Math.ceil(Math.random()*100)
@@ -352,14 +378,19 @@ $(document).ready(function(){
                     if(arr[i]==randomnumber){found=true;break}
                 }
                 if(!found)arr[arr.length]=randomnumber;
-            }
+            }*/
 
-            $('#electric-container').highcharts().addSeries({
+            var objElect = g_globalObjectElect.getSelectedDay();
+            var diaElectHora = jsonConverter(1,2,3);
+            var electChart = $('#electric-container').highcharts();
+            var electValues =  diaElectHora[1];
+
+            electChart.xAxis[0].setCategories(diaElectHora[0]);          
+            electChart.addSeries({
                 name: "Electricidad consumida el " + (objElect.day + '/' + objElect.month  + '/' +  objElect.year),
-                data: arr,//[10, 10, 50, 70, 30, 20, 10, 70, 90, 60, 35, 65, 70, 85, 80, 80, 85, 90, 70, 50, 40, 20, 20, 20],
-                pointInterval: 3600 * 1000, // one day]
+                data: electValues,
                 color: "#388e3c",
-            });            
+            });
         });
     };
 }); 
