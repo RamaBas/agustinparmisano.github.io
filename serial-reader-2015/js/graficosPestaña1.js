@@ -169,7 +169,7 @@ $(document).ready(function(){
                     setInterval(function () {
                         var point = chart.series[0].points[0],
                             newVal,
-                            inc = Math.round((Math.random() - 0.5) * 20);
+                            inc = Math.round((Math.random() - 0.5) * 200);
 
                         newVal = point.y + inc;
                         if (newVal < 0 || newVal > 200) {
@@ -331,7 +331,7 @@ $(document).ready(function(){
         clock.reset();
     });
 
-    clock = new FlipClock($('.clock2'), 000000, {
+    clock = new FlipClock($('.clock2'), 050000, {
                 clockFace: 'Counter',
                 minimumDigits: '6',
                 autoStart: 'true'
@@ -359,7 +359,7 @@ $(document).ready(function(){
         clock.reset();
     });
 
-    $.ajax({ url: 'http://clima.info.unlp.edu.ar/last?lang=es', success: function(data) { document.getElementById("myDiv").innerHTML=data; } });
+    //$.ajax({ url: 'http://clima.info.unlp.edu.ar/', success: function(data) { document.getElementById("myDiv").innerHTML=data; } });
 
 
 });
