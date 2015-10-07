@@ -1,4 +1,35 @@
+var miDato;
+
 $(document).ready(function(){
+    getValores();
+
+    function getValores(){
+        var xmlhttp = new XMLHttpRequest();
+        var url = "http://192.168.1.75:8003/actual";
+        var miJson;
+
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                miDato = JSON.parse(xmlhttp.responseText);
+                clock1.setValue(miDato.energia_hoy);
+                clock2.setValue(miDato.energia_total);
+            }
+        }
+
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+    }
+
+    function funcionConJson(dato){
+        var datoAnterior = 0;
+
+        if (dato) {
+            datoAnterior = dato;
+            return dato;
+        }else{
+            return datoAnterior;
+        }
+    }
 
     $(function () {
         $('#area1').highcharts({
@@ -119,7 +150,7 @@ $(document).ready(function(){
             // the value axis
             yAxis: {
                 min: 0,
-                max: 200,
+                max: 4500,
 
                 minorTickInterval: 'auto',
                 minorTickWidth: 1,
@@ -137,44 +168,43 @@ $(document).ready(function(){
                     rotation: 'auto'
                 },
                 title: {
-                    text: 'km/h'
+                    text: 'Watts'
                 },
                 plotBands: [{
                     from: 0,
-                    to: 120,
+                    to: 1200,
                     color: '#55BF3B' // green
                 }, {
-                    from: 120,
-                    to: 160,
+                    from: 1200,
+                    to: 2600,
                     color: '#DDDF0D' // yellow
                 }, {
-                    from: 160,
-                    to: 200,
+                    from: 2600,
+                    to: 4500,
                     color: '#DF5353' // red
                 }]
             },
 
             series: [{
-                name: 'Speed',
+                name: 'Potencia',
                 data: [80],
                 tooltip: {
-                    valueSuffix: ' km/h'
+                    valueSuffix: 'Watts'
                 }
             }]
 
         },
             // Add some life
             function (chart) {
+
                 if (!chart.renderer.forExport) {
                     setInterval(function () {
                         var point = chart.series[0].points[0],
                             newVal,
-                            inc = Math.round((Math.random() - 0.5) * 200);
+                            inc = miDato.potencia//Math.round((Math.random() - 0.5) * 200);
 
-                        newVal = point.y + inc;
-                        if (newVal < 0 || newVal > 200) {
-                            newVal = point.y - inc;
-                        }
+                        getValores();
+                        newVal = inc;
 
                         point.update(newVal);
 
@@ -239,7 +269,7 @@ $(document).ready(function(){
             // the value axis
             yAxis: {
                 min: 0,
-                max: 200,
+                max: 10,
 
                 minorTickInterval: 'auto',
                 minorTickWidth: 1,
@@ -257,28 +287,28 @@ $(document).ready(function(){
                     rotation: 'auto'
                 },
                 title: {
-                    text: 'km/h'
+                    text: 'Amper'
                 },
                 plotBands: [{
                     from: 0,
-                    to: 120,
+                    to: 5,
                     color: '#55BF3B' // green
                 }, {
-                    from: 120,
-                    to: 160,
+                    from: 5,
+                    to: 8,
                     color: '#DDDF0D' // yellow
                 }, {
-                    from: 160,
-                    to: 200,
+                    from: 8,
+                    to: 10,
                     color: '#DF5353' // red
                 }]
             },
 
             series: [{
-                name: 'Speed',
-                data: [80],
+                name: 'Corriente',
+                data: [0],
                 tooltip: {
-                    valueSuffix: ' km/h'
+                    valueSuffix: 'Amper'
                 }
             }]
 
@@ -289,12 +319,8 @@ $(document).ready(function(){
                     setInterval(function () {
                         var point = chart.series[0].points[0],
                             newVal,
-                            inc = Math.round((Math.random() - 0.5) * 20);
-
-                        newVal = point.y + inc;
-                        if (newVal < 0 || newVal > 200) {
-                            newVal = point.y - inc;
-                        }
+                            inc = miDato.corriente;
+                        newVal = inc / 10;
 
                         point.update(newVal);
 
@@ -303,14 +329,43 @@ $(document).ready(function(){
             });
     });
 
-    clock = new FlipClock($('.clock1'), 000000, {
+    clock1 = new FlipClock($('.clock1'), 000000, {
                 clockFace: 'Counter',
                 minimumDigits: '6',
-                autoStart: 'true'
+                autoStart: 'false'
+            });
+
+
+    // Attach a click event to a button a increment the clock
+    //$('.increment').click(function() {
+       // clock.setValue(miDato.energia_hoy);
+
+        // Or you could decrease the clock
+        // clock.decrement();
+
+        //clock.increment();
+
+        // Or set it to a specific value
+        // clock.setValue(x);
+    //});
+
+    /* Attach a click event to a button a decrement the clock
+    $('.decrement').click(function() {
+        clock.decrement();
+    });*/
+
+    /*$('.reset').click(function() {
+        clock.reset();
+    });*/
+
+    clock2 = new FlipClock($('.clock2'), 000000, {
+                clockFace: 'Counter',
+                minimumDigits: '6',
+                autoStart: 'false'
             });
 
     // Attach a click event to a button a increment the clock
-    $('.increment').click(function() {
+    /*$('.increment').click(function() {
         //clock.setValue(10);
 
         // Or you could decrease the clock
@@ -329,35 +384,7 @@ $(document).ready(function(){
 
     $('.reset').click(function() {
         clock.reset();
-    });
-
-    clock = new FlipClock($('.clock2'), 050000, {
-                clockFace: 'Counter',
-                minimumDigits: '6',
-                autoStart: 'true'
-            });
-
-    // Attach a click event to a button a increment the clock
-    $('.increment').click(function() {
-        //clock.setValue(10);
-
-        // Or you could decrease the clock
-        // clock.decrement();
-
-        clock.increment();
-
-        // Or set it to a specific value
-        // clock.setValue(x);
-    });
-
-    // Attach a click event to a button a decrement the clock
-    $('.decrement').click(function() {
-        clock.decrement();
-    });
-
-    $('.reset').click(function() {
-        clock.reset();
-    });
+    });*/
 
     //$.ajax({ url: 'http://clima.info.unlp.edu.ar/', success: function(data) { document.getElementById("myDiv").innerHTML=data; } });
 

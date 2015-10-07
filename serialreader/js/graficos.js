@@ -167,7 +167,7 @@ $(function () {
                 setInterval(function () {
                     var point = chart.series[0].points[0],
                         newVal,
-                        inc = Math.round((Math.random() - 0.5) * 20);
+                        inc =  //Math.round((Math.random() - 0.5) * 20);
 
                     newVal = point.y + inc;
                     if (newVal < 0 || newVal > 200) {

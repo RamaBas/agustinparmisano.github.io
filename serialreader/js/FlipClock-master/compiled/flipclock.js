@@ -1981,7 +1981,7 @@ var FlipClock;
 			factory.autoStart = options.autoStart ? true : false;
 
 			if(options.autoStart) {
-				this.shouldAutoIncrement = true;
+				this.shouldAutoIncrement = false;
 			}
 
 			factory.increment = function() {
