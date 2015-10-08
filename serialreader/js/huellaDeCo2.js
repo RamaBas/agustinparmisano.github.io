@@ -1,4 +1,60 @@
+var miDato;
+
 $(document).ready(function(){
+	getValores();
+
+    function getValores(){
+        var xmlhttp = new XMLHttpRequest();
+        var url = "http://192.168.1.75:8003/actual";
+        var miJson;
+
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                miDato = JSON.parse(xmlhttp.responseText);
+                var acuTotCo2Petro = toCo2(coefPetr, miDato.energia_total);
+				var acuTotCo2Gas = toCo2(coefGas, miDato.energia_total);
+				console.log("Gas " + acuTotCo2Gas + "  Petr " + acuTotCo2Petro);
+
+				$('#acumuladaTotalKw').append(miDato.energia_total + " Kw");
+
+
+
+				if($('#container').highcharts().series[0] > -1){
+					$('#container').highcharts().series[0].remove;
+	                $('#container').highcharts().addSeries({
+		            	name: 'Gas',
+		            	data: [acuTotCo2Gas],
+					});
+				}else{
+                	$('#container').highcharts().addSeries({
+		            	name: 'Gas',
+		            	data: [acuTotCo2Gas],
+					});
+				}
+
+				if($('#container').highcharts().series[1] > -1){
+					$('#container').highcharts().series[1].remove;
+			        $('#container').highcharts().addSeries({
+			            name: 'Pretróleo',
+			            data: [acuTotCo2Petro]
+			        });
+				}else{
+			        $('#container').highcharts().addSeries({
+			            name: 'Pretróleo',
+			            data: [acuTotCo2Petro]
+			        });
+				}
+
+
+            }
+        }
+
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+
+    }
+
+
 	//Obtener la potencia acumulada del día y la acumulada total
 	//poner en varibales para pasar al html
 	var acuTot = 500;
@@ -37,7 +93,7 @@ $(document).ready(function(){
 	        },
 	        yAxis: {
 	            min: 0,
-	            max: 1200 * 30 * 12 / 1000,
+	            max: (1200 * 30 * 12) / 40,
                 labels:{
         			formatter: function () {
                         return this.value + 'TCo2';
@@ -63,13 +119,13 @@ $(document).ready(function(){
 	                borderWidth: 0
 	            }
 	        },
-	        series: [{
+	        /*series: [{
 	            name: 'Gas',
 	            data: [acuTotCo2Gas],
 	        }, {
 	            name: 'Pretróleo',
 	            data: [acuTotCo2Petro]
-	        }]
+	        }]*/
 	    });
 	});
 

@@ -187,7 +187,7 @@ $(document).ready(function(){
 
             series: [{
                 name: 'Potencia',
-                data: [80],
+                data: [0],
                 tooltip: {
                     valueSuffix: 'Watts'
                 }
