@@ -71,7 +71,28 @@ body {
 		display: none;
 	}
 }
+@media(min-width: 1000px) and (max-width: 1024px){
+	#container-speed {
+		margin-left: 15%;
+	}
 
+	#container-rpm  {
+		margin-left: 35%;
+	}
+
+
+	#centro {
+		display: none;
+	}
+
+	#izquierda {
+		display: none;
+	}
+
+	#responsive-derecha {
+		display: block;
+	}
+}
 
 @media(max-width: 1000px){
 	#container-speed, #container-rpm  {
