@@ -1,3 +1,84 @@
+var ipVariable = "http://192.168.43.153";
+var urlTemp = ipVariable + "/freedom/sensor/7/read?format=json";
+var urlHume = ipVariable + "/freedom/sensor/8/read?format=json";
+var urlElectric = "url electrica";
+var urlLuzComedor = ipVariable + "/freedom/actuator/4/action";
+var urlLuzCocina = ipVariable + "/freedom/actuator/7/action";
+var urlBuzzer = ipVariable + "/freedom/actuator/6/action";
+var humedad = 0;
+var temperatura = 0;
+
+    /*function getHumedad(){
+        var xmlhttp = new XMLHttpRequest();
+        var url = urlTemp;
+        console.log(urlTemp);
+
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                misDatos = JSON.parse(xmlhttp.responseText);
+                console.log(misDatos);
+            }
+        }
+
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+    }*/
+function getHumedad() {
+    $.ajax({
+        //Cambiar a type: POST si necesario
+        type: "GET",
+        // Formato de datos que se espera en la respuesta
+        dataType: "json",
+        // URL a la que se enviará la solicitud Ajax
+        url: urlHume,
+    })
+     .done(function( data, textStatus, jqXHR ) {
+         if ( console && console.log ) {
+            humedad = data[0].data;         }
+     })
+     .fail(function( jqXHR, textStatus, errorThrown ) {
+         if ( console && console.log ) {
+             console.log( "La solicitud a fallado: " +  textStatus);
+         }
+    });
+}
+
+function getTemperatura() {
+    $.ajax({
+        //Cambiar a type: POST si necesario
+        type: "GET",
+        // Formato de datos que se espera en la respuesta
+        dataType: "json",
+        // URL a la que se enviará la solicitud Ajax
+        url: urlTemp,
+    })
+     .done(function( data, textStatus, jqXHR ) {
+         if ( console && console.log ) {
+            temperatura = data[0].data;         }
+     })
+     .fail(function( jqXHR, textStatus, errorThrown ) {
+         if ( console && console.log ) {
+             console.log( "La solicitud a fallado: " +  textStatus);
+         }
+    });
+}
+
+function luzCocina(){
+
+    $.get(urlLuzCocina);
+
+};
+
+function luzComedor(){
+
+    $.get(urlLuzComedor);
+
+};
+
+function activarAlarma() {
+    $.get(urlBuzzer);
+}
+
 $(function () {
 
     var gaugeOptions = {
@@ -59,7 +140,7 @@ $(function () {
     $('#container-speed').highcharts(Highcharts.merge(gaugeOptions, {
         yAxis: {
             min: 0,
-            max: 200,
+            max: 100,
             title: {
                 text: 'Temperatura'
             }
@@ -88,7 +169,7 @@ $(function () {
     $('#container-rpm').highcharts(Highcharts.merge(gaugeOptions, {
         yAxis: {
             min: 0,
-            max: 5,
+            max: 100,
             title: {
                 text: 'Humedad'
             }
@@ -102,11 +183,11 @@ $(function () {
             data: [1],
             dataLabels: {
                 format: '<div style="text-align:center"><span style="font-size:25px;color:' +
-                    ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}</span><br/>' +
+                    ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
                        '<span style="font-size:12px;color:silver"> %</span></div>'
             },
             tooltip: {
-                valueSuffix: ' revolutions/min'
+                valueSuffix: ' Humedad%'
             }
         }]
 
@@ -122,30 +203,20 @@ $(function () {
 
         if (chart) {
             point = chart.series[0].points[0];
-            inc = Math.round((Math.random() - 0.5) * 100);
-            newVal = point.y + inc;
-
-            if (newVal < 0 || newVal > 200) {
-                newVal = point.y - inc;
-            }
-
-            point.update(newVal);
+            getTemperatura();
+            inc = temperatura;//Math.round((Math.random() - 0.5) * 100);
+            point.update(inc);
         }
 
         // RPM
         chart = $('#container-rpm').highcharts();
         if (chart) {
             point = chart.series[0].points[0];
-            inc = Math.random() - 0.5;
-            newVal = point.y + inc;
-
-            if (newVal < 0 || newVal > 5) {
-                newVal = point.y - inc;
-            }
-
-            point.update(newVal);
+            getHumedad();
+            inc = humedad;
+            point.update(inc);
         }
-    }, 2000);
+    }, 500);
 
 
 });
