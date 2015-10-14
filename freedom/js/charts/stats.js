@@ -32,27 +32,8 @@ if(mm<10) {
 } 
 
 today = yyyy+'-'+mm+'-'+dd;
+getTempByDay(yyyy,mm,dd);
 
-
-$.ajax({
-    //Cambiar a type: POST si necesario
-    type: "GET",
-    // Formato de datos que se espera en la respuesta
-    dataType: "json",
-    // URL a la que se enviará la solicitud Ajax
-    url: urlTempStats + today,
-})
- .done(function( data, textStatus, jqXHR ) {
-     if ( console && console.log ) {
-        var hoyTempStats = data[0].values;
-        getTempsValuesHoras(hoyTempStats);
-    }
- })
- .fail(function( jqXHR, textStatus, errorThrown ) {
-     if ( console && console.log ) {
-         console.log( "La solicitud a fallado: " +  textStatus);
-     }
-});
 
 var arregloTemps = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35];
 
@@ -147,13 +128,7 @@ function getTempByDay(year, month, day){
                     }
                 }
             },
-            series: [{
-                name: 'Temperatura Hoy',
-                data: [12,13,13,14,16,17,18,15,13,13],
-                color: "#d32f2f",
-                type: 'line',
-            }           
-            ]
+
         });
     });
 
