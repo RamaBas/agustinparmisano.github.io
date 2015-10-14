@@ -150,7 +150,6 @@ function getElectricity() {
      .done(function( data, textStatus, jqXHR ) {
          if ( console && console.log ) {
             electricity = parseFloat(data[0].data);
-            console.log(electricity)
         }
      })
      .fail(function( jqXHR, textStatus, errorThrown ) {
@@ -388,7 +387,6 @@ $(function () {
                         i;
 
                     for (i = -19; i <= 0; i += 1) {
-                        console.log(electricity);
                         data.push({
                             x: time + i * 1000,
                             y: electricity

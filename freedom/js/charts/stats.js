@@ -1,96 +1,96 @@
+var arregloDeTempsValues = [];
+var arregloDeTempsHoras = [];
+var ipVariable = "http://192.168.43.153:8081";
+var urlTempStats = ipVariable + "/freedom/sensor/7/values_date/"; 
+var urlHumeStats = ipVariable + "/freedom/sensor/8/values_date/"; 
+var urlElectStats = ipVariable + "/freedom/sensor/10/values_date/"; 
+var hoyTempStats = 0;
+
+
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+
+function getTempsValuesHoras(tempStats){
+    for (var i in tempStats) {
+        arregloDeTempsValues.push(parseInt(tempStats[i].value));
+        arregloDeTempsHoras.push(tempStats[i].created_hour);
+    }
+}
+
+
 
 $(document).ready(function(){
 
-    function jsonConverter(day, month, year) {
+if(dd<10) {
+    dd='0'+dd
+} 
 
-        var jsonDeUnDia = [ 
-                    {
-                        
-                        "name":"temperatura",
+if(mm<10) {
+    mm='0'+mm
+} 
 
-                        "values":[
-                                {
-                                    "created_hour":"17:35:45.201",
-                                    "value":"19"
-                                },
-                                {   
-                                    "created_hour":"17:35:55.862",
-                                    "value":"19"
-                                },
-                                {   
-                                    "created_hour":"17:36:06.445",
-                                    "value":"19"
-                                },
-                                {   
-                                    "created_hour":"17:36:16.928",
-                                    "value":"19"
-                                },
-                                {   
-                                    "created_hour":"17:36:27.391",
-                                    "value":"19"
-                                },
-                                {   
-                                    "created_hour":"17:36:37.845",
-                                    "value":"19"
-                                },
-                                {   
-                                    "created_hour":"17:36:48.340",  
-                                    "value":"19"
-                                },
-                                {
-                                    "created_hour":"17:36:58.898",
-                                    "value":"19"
-                                },
-                                {
-                                    "created_hour":"17:37:09.602",
-                                    "value":"19"
-                                },
-                                {   
-                                    "created_hour":"17:37:20.162",
-                                    "value":"19"
-                                },
-                                {
-                                    "created_hour":"17:37:30.987",
-                                    "value":"19"
-                                },
-                                {
-                                    "created_hour":"17:37:41.465",
-                                    "value":"19"
-                                },
-                                {
-                                    "created_hour":"17:37:52.022",
-                                    "value":"19"
-                                },
-                                {
-                                    "created_hour":"17:38:02.567",
-                                    "value":"19"
-                                },
-                                {
-                                    "created_hour":"17:38:13.142",
-                                    "value":"19"
-                                },
-                                {
-                                    "created_hour":"17:38:23.670",
-                                    "value":"19"
-                                }
-                        ]
-                    
-                        
-                        }
-                ];
-        var diaValorJSON = jsonDeUnDia;
-        var tiempos = [];
-        var valores = [];
+today = yyyy+'-'+mm+'-'+dd;
 
-        for(t=0; t<diaValorJSON[0].values.length; t++){
-            tiempos.push(diaValorJSON[0].values[t].created_hour);
-            valores.push(parseInt(diaValorJSON[0].values[t].value));
+
+$.ajax({
+    //Cambiar a type: POST si necesario
+    type: "GET",
+    // Formato de datos que se espera en la respuesta
+    dataType: "json",
+    // URL a la que se enviará la solicitud Ajax
+    url: urlTempStats + today,
+})
+ .done(function( data, textStatus, jqXHR ) {
+     if ( console && console.log ) {
+        var hoyTempStats = data[0].values;
+        getTempsValuesHoras(hoyTempStats);
+    }
+ })
+ .fail(function( jqXHR, textStatus, errorThrown ) {
+     if ( console && console.log ) {
+         console.log( "La solicitud a fallado: " +  textStatus);
+     }
+});
+
+var arregloTemps = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35];
+
+function getTempByDay(year, month, day){
+    $.ajax({
+    //Cambiar a type: POST si necesario
+    type: "GET",
+    // Formato de datos que se espera en la respuesta
+    dataType: "json",
+    // URL a la que se enviará la solicitud Ajax
+    url: urlTempStats + year + "-" + month + "-" + day,
+    })
+     .done(function( data, textStatus, jqXHR ) {
+         if ( console && console.log ) {
+            var fechaTempStats = data[0].values;
+            getTempsValuesHoras(fechaTempStats);
+            var tempChart = $('#temp-container').highcharts();
+            var tempValues = arregloDeTempsValues;
+
+            tempChart.xAxis[0].setCategories(arregloDeTempsHoras);
+
+            tempChart.yAxis[0].setCategories(arregloTemps);
+
+
+            tempChart.addSeries({
+                name: "Temperatura en " + (year + '/' + month  + '/' +  year),
+                data: tempValues,
+                color: "#d32f2f"
+            });
         }
-
-        var diaValores = [ tiempos, valores ];
-
-        return diaValores;
-    }; 
+     })
+     .fail(function( jqXHR, textStatus, errorThrown ) {
+         if ( console && console.log ) {
+             console.log( "La solicitud a fallado: " +  textStatus);
+         }
+    });
+}
+    
 
     $(function () {
         $('#temp-container').highcharts({
@@ -115,6 +115,7 @@ $(document).ready(function(){
                 title: {
                     text: 'Temperatura'
                 },
+
                 min: 0,
                 max: 50,
                 labels: {
@@ -311,17 +312,10 @@ $(document).ready(function(){
             }*/
 
             var objTemp = g_globalObjectTemp.getSelectedDay();
-            var diaTempHora = jsonConverter(1,2,3);
-            var tempChart = $('#temp-container').highcharts();
-            var tempValues =  diaTempHora[1];
+            var diaTempHora = getTempByDay(objTemp.year, objTemp.month, objTemp.day);
+            //var tempValues =  arregloDeTempsValues.slice(1, 900);
             
-            tempChart.xAxis[0].setCategories(diaTempHora[0]);
-            
-            tempChart.addSeries({
-                name: "Temperatura en " + (objTemp.day + '/' + objTemp.month  + '/' +  objTemp.year),
-                data: tempValues,
-                color: "#d32f2f"
-            });
+
 
         });
 
