@@ -5,7 +5,7 @@ $(document).ready(function(){
 
     function getValores(){
         var xmlhttp = new XMLHttpRequest();
-        var url = "http://192.168.1.75:8003/actual";
+        var url = "http://192.168.1.100:8003/actual";
         var miJson;
 
         xmlhttp.onreadystatechange = function() {

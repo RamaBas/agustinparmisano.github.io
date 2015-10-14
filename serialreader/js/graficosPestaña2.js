@@ -6,14 +6,14 @@ $(document).ready(function(){
 
     function getValoresSegunFecha(fechaIni, fechaFin){
         var xmlhttp = new XMLHttpRequest();
-        var url = "http://192.168.1.75:8003/historico/" + fechaIni + "/" + fechaFin;
+        var url = "http://192.168.1.100:8003/historico/" + fechaIni + "/" + fechaFin;
 
         console.log(url);
 
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 misDatos = JSON.parse(xmlhttp.responseText);
-                console.log(" misgatos33 " + misDatos.elementos[3].potencia);
+                console.log(" misgatos33 " + misDatos.elementos[1].potencia);
 
                 for(var i=0; i<misDatos.elementos.length; i++ ){
                     if (misDatos.elementos[i].potencia) {
@@ -34,7 +34,7 @@ $(document).ready(function(){
                 $('#area1').highcharts().addSeries({
                     name: ("Corriente"), // generada por hora del día " + ev.date.getDate() + '/' + (ev.date.getMonth() + 1)  + '/' +  ev.date.getFullYear()),
                     data: arregloCor,//[10, 10, 50, 70, 30, 20, 10, 70, 90, 60, 35, 65, 70, 85, 80, 80, 85, 90, 70, 50, 40, 20, 20, 20],
-                    type: "column",
+                    type: "line",
                     yAxis: 1,
                     color: "#337ab7"
                 });
