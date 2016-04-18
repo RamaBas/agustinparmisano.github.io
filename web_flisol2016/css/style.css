@@ -6,7 +6,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 /*--- reset code ---*/
 
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
-    color: #fff;
+    color: #000;
     background-color: #0700a7;
 }
 
